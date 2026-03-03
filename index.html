@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños 🎂</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* CONTENEDOR TARJETA */
+.card-container {
+    perspective: 1000px;
+}
+
+.card {
+    width: 320px;
+    height: 450px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    cursor: pointer;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* FRENTE */
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ATRÁS */
+.card-back {
+    background: white;
+    transform: rotateY(180deg);
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* CONFETI */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    top: -10px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card-container">
+    <div class="card" id="card">
+        
+        <div class="card-face card-front">
+            <img src="https://i.imgur.com/fVEiOD1.jpg" alt="Cumpleaños">
+        </div>
+
+        <div class="card-face card-back">
+            <div>
+                <h2>🎉 Feliz Cumpleaños 🎂</h2>
+                <p>
+                Hoy no solo celebro tu vida, sino la suerte de tenerte como mejor amiga, me puse a pensar en todo este tiempo y lo que más valoro es esa complicidad única que tenemos, esa complicidad para el loqueo jeje, de decir cualquier tontera y reírnos de la nada, pero también de tener ese espacio seguro para simplemente ser.
+                <br><br>
+                Gracias de todo corazón por no haberte ido nunca, especialmente por haber estado ahí firme hasta en mis peores momentos. Saber que cuento contigo cuando las cosas se ponen cuesta arriba es algo que no tiene precio y que hace que nuestra amistad se haya mantenido.
+                <br><br>
+                Espero que hoy te consientan muchísimo y pases muy bonito. Asoma un día de estos cuando puedas, que tengo un pequeño presente para ti.
+                <br><br>
+                Te quiero muchísimo, mejor amiga. ¡Disfruta tu día al máximo! 🥂🎈
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const card = document.getElementById("card");
+
+card.addEventListener("click", () => {
+    card.classList.toggle("flip");
+    launchConfetti();
+});
+
+function launchConfetti() {
+    for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        document.body.appendChild(confetti);
+
+        const colors = ["#ff0", "#f0f", "#0ff", "#ff5722", "#4caf50", "#2196f3"];
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+}
+</script>
+
+</body>
+</html>
